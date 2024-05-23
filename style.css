@@ -1,6 +1,26 @@
+body {
+    background-color: greenyellow;
+}
+
 h1 {
     color: green;
     background-color: greenyellow;
+    width: 250px;
+    margin-left: 490px;
+    padding-left: 20px;
+}
+
+form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-shadow: 4px 4px 4px #bbb;
+    width: 400px;
+    margin: 0 auto;
+    border: 1px solid #555;
 }
 
 .controle-form {
@@ -13,4 +33,9 @@ h1 {
 
 #cep, #logradouro, #bairro, #cidade, #uf {
     background-color: yellow;
+}
+
+#btnBuscarEndereco {
+    margin-left: 500px;
+    margin-top: 25px;
 }
