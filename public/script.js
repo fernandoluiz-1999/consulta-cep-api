@@ -82,6 +82,22 @@ function cadastraCEP(enderecoCompleto) {
     })
 
 }
+
+function atualizaCEP(id, enderecoCompleto) {
+    fetch('http://localhost:3000/endereco/${id}', {
+        "method": "PUT",
+        "headers": {
+            "Content-type": "application/json"
+        },
+        "body": JSON.stringify(enderecoCompleto)
+    }).then(resposta => {
+        resposta.ok ? window.alert('Endereço atualizado!') :
+        window.alert('Erro ' + resposta.status)
+    }).catch(error => {
+        window.alert('Erro na atualização ' + error.message);
+    });
+}
+
 function consultaPorBairro() {
     const uf = document.querySelector('#uf').value;
     const cidade = document.querySelector('#cidade').value;
