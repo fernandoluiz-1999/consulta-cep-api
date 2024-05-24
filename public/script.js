@@ -84,7 +84,7 @@ function cadastraCEP(enderecoCompleto) {
 }
 
 function atualizaCEP(id, enderecoCompleto) {
-    fetch('http://localhost:3000/endereco/${id}', {
+    fetch(`http://localhost:3000/endereco/${id}`, {
         "method": "PUT",
         "headers": {
             "Content-type": "application/json"
