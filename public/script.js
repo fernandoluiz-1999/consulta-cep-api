@@ -65,6 +65,23 @@ function limpaForm() {
 
 }
 
+function cadastraCEP(enderecoCompleto) {
+    
+    fetch('http://localhost:3000/endereco', {
+        "method": "POST",
+        "headers": {
+            "Content-type": "application/json"
+        },
+        "body": JSON.stringify(enderecoCompleto)
+    }).then(resposta => {
+        // if (resposta.ok) window.alert('Endereço cadastrado')
+        // else window.alert('Erro: '+resposta.status)
+
+        resposta.ok ? window.alert('Endereço cadastrado!') :
+        window.alert('Erro: ' + resposta.status)
+    })
+
+}
 function consultaPorBairro() {
     const uf = document.querySelector('#uf').value;
     const cidade = document.querySelector('#cidade').value;
