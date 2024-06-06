@@ -39,11 +39,32 @@
         <a href="cadastro-cep.html">Cadastrar um novo CEP</a>
 
     </form>
+
+    <h2>Atualização de Endereço</h2>
+    <form id="atualizacao-form">
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <label for="cep-update">CEP:</label>
+        <input type="text" id="cep-update" name="cep-update" required><br>
+        <button type="button" onclick="consultaCEP(document.querySelector('#cep-update').value)">Consultar CEP</button><br>
+
+        <label for="logradouro-update">Logradouro:</label>
+        <input type="text" id="logradouro-update" name="logradouro-update" required><br>
+
+        <label for="bairro-update">Bairro:</label>
+        <input type="text" id="bairro-update" name="bairro-update" required><br>
+
+        <button type="button" onclick="atualizaCEP(document.querySelector('#id').value, coletaDadosAtualizacao())">Atualizar Endereço</button>
+    </form>
     
     <script src="/script.js"></script>
 
-    <button id="btnBuscarEndereco">Buscar Endereço</button>
-    <button id="btnBuscarBairro">Buscar por Bairro</button>
+    </script>
+
+    <!-- <button id="btnBuscarEndereco">Buscar Endereço</button>
+    <button id="btnBuscarBairro">Buscar por Bairro</button> -->
     <!-- <script>
         document.querySelector('#cep').addEventListener('blur', () => {
             const cep = document.querySelector('#cep').value;

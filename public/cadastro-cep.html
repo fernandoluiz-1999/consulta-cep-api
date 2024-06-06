@@ -58,6 +58,19 @@
 
             cadastraCEP(enderecoCompleto);
         });
+
+        document.querySelector('#btAtualizar').addEventListener('click', () => {
+            const id = document.querySelector('#id').value;
+            const enderecoCompleto = {
+                "cep": document.querySelector('#cep-update').value,
+                "logradouro": document.querySelector('#logradouro-update').value,
+                "bairro": document.querySelector('#bairro-update').value,
+                "cidade": document.querySelector('#cidade-update').value,
+                "uf": document.querySelector('#uf-update').value
+            };
+
+            atualizaCEP(id, enderecoCompleto);
+        });
     </script>
 
 </body>

@@ -1,3 +1,5 @@
+// Função para consultar o CEP e preencher o formulário com os dados recebidos
+
 function consultaCEP(cep) {
 
     cep = cep.replace(/\D/g, ''); // expressão regular -> regex
@@ -24,6 +26,8 @@ function consultaCEP(cep) {
                 .then(resposta => {
 
                     if (!("erro" in resposta)) {
+
+                        preencherFormulario(resposta);
                         
                         document.querySelector('#logradouro').value = resposta.logradouro;
                         document.querySelector('#bairro').value = resposta.bairro;
@@ -57,12 +61,46 @@ function consultaCEP(cep) {
 
 } // fecha a função
 
+function preencherFormulario() {
+
+    document.querySelector('#logradouro').value = dados.logradouro;
+    document.querySelector('#bairro').value = dados.bairro;
+    document.querySelector('#cidade').value = dados.cidade;
+    document.querySelector('#uf').value = dados.uf;
+
+    document.querySelector('#logradouro-update').value = dados.logradouro;
+    document.querySelector('#bairro-update').value = dados.bairro;
+    document.querySelector('#cidade-update').value = dados.cidade;
+    document.querySelector('#uf-update').value = dados.uf;
+
+}
+
 function limpaForm() {
     
     document.querySelectorAll('input:not(#cep)').forEach(input => {
         input.value = '';
     })
 
+}
+
+function coletaDadosFormulario() {
+    return {
+        cep: document.querySelector('#cep').value,
+        logradouro: document.querySelector('#logradouro').value,
+        bairro: document.querySelector('#bairro').value,
+        cidade: document.querySelector('#cidade').value,
+        uf: document.querySelector('#uf').value,
+    };
+}
+
+function coletaDadosAtualizacao() {
+    return {
+        cep: document.querySelector('#cep-update').value,
+        logradouro: document.querySelector('#logradouro-update').value,
+        bairro: document.querySelector('#bairro-update').value,
+        cidade: document.querySelector('#cidade-update').value,
+        uf: document.querySelector('#uf-update').value,
+    };
 }
 
 function cadastraCEP(enderecoCompleto) {
@@ -98,53 +136,53 @@ function atualizaCEP(id, enderecoCompleto) {
     });
 }
 
-function consultaPorBairro() {
-    const uf = document.querySelector('#uf').value;
-    const cidade = document.querySelector('#cidade').value;
-    const bairro = document.querySelector('#bairro').value;
+// function consultaPorBairro() {
+//     const uf = document.querySelector('#uf').value;
+//     const cidade = document.querySelector('#cidade').value;
+//     const bairro = document.querySelector('#bairro').value;
 
-    if (bairro.length < 3) {
-        window.alert('O bairro deve conter pelo menos 3 caracteres');
-        return;
-    }
+//     if (bairro.length < 3) {
+//         window.alert('O bairro deve conter pelo menos 3 caracteres');
+//         return;
+//     }
 
-    if (cidade.length < 3) {
-        window.alert('A cidade deve conter pelo menos 3 caracteres');
-        return;
-    }
+//     if (cidade.length < 3) {
+//         window.alert('A cidade deve conter pelo menos 3 caracteres');
+//         return;
+//     }
 
-    const requisicao = new Request(`https://viacep.com.br/ws/${uf}/${cidade}/${bairro}/json`, {
-        "method": "GET",
-        "headers": {
-            "Content-type": "application/json"
-        }
-    });
+//     const requisicao = new Request(`https://viacep.com.br/ws/${uf}/${cidade}/${bairro}/json`, {
+//         "method": "GET",
+//         "headers": {
+//             "Content-type": "application/json"
+//         }
+//     });
 
-    fetch(requisicao)
-        .then(resposta => {
-            if (resposta.status === 400) {
-                throw new Error('Bad Request');
-            }
-            return resposta.json();
-        })
-        .then(resposta => {
-            if (resposta.length > 0) {
-                const resultado = resposta[0]; // Pega o primeiro resultado
+//     fetch(requisicao)
+//         .then(resposta => {
+//             if (resposta.status === 400) {
+//                 throw new Error('Bad Request');
+//             }
+//             return resposta.json();
+//         })
+//         .then(resposta => {
+//             if (resposta.length > 0) {
+//                 const resultado = resposta[0]; // Pega o primeiro resultado
 
-                document.querySelector('#logradouro').value = resultado.logradouro;
-                document.querySelector('#bairro').value = resultado.bairro;
-                document.querySelector('#cidade').value = resultado.localidade;
-                document.querySelector('#uf').value = resultado.uf;
-            } else {
-                limpaForm();
-                window.alert('Endereço não localizado');
-            }
-        })
-        .catch(error => {
-            limpaForm();
-            window.alert('Erro na consulta: ' + error.message);
-        });
-}
+//                 document.querySelector('#logradouro').value = resultado.logradouro;
+//                 document.querySelector('#bairro').value = resultado.bairro;
+//                 document.querySelector('#cidade').value = resultado.localidade;
+//                 document.querySelector('#uf').value = resultado.uf;
+//             } else {
+//                 limpaForm();
+//                 window.alert('Endereço não localizado');
+//             }
+//         })
+//         .catch(error => {
+//             limpaForm();
+//             window.alert('Erro na consulta: ' + error.message);
+//         });
+// }
 
-document.querySelector('#btnBuscarEndereco').addEventListener('click', consultaPorEndereco);
-document.querySelector('#btnBuscarBairro').addEventListener('click', consultaPorBairro);
+// document.querySelector('#btnBuscarEndereco').addEventListener('click', consultaPorEndereco);
+// document.querySelector('#btnBuscarBairro').addEventListener('click', consultaPorBairro);
